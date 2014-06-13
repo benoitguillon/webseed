@@ -17,7 +17,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"com.neoxam.web.api.**", "com.neoxam.web.ctrl.**"})
+@ComponentScan({"org.bgi.webseed.api.**", "org.bgi.webseed.ctrl.**"})
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	private static final Log logger = LogFactory.getLog(WebMvcConfig.class);
@@ -31,7 +31,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**/*.css").addResourceLocations("classpath:/css/").setCachePeriod(31556926);
         registry.addResourceHandler("/img/**").addResourceLocations("/img/").setCachePeriod(31556926);
-        registry.addResourceHandler("/js/**/*.js").addResourceLocations("classpath:/").setCachePeriod(31556926);
+        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/").setCachePeriod(31556926);
     }
 	
 	@Override
