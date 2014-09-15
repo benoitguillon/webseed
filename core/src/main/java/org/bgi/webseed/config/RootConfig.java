@@ -6,6 +6,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Main application configuration
+ * 
+ * @author guillon
+ */
 @Configuration
 @ComponentScan
 public class RootConfig {
@@ -19,7 +24,5 @@ public class RootConfig {
 		registry.addMainMenu(myprofileItem);
 		return registry;
 	}
-	
-	
 
 }

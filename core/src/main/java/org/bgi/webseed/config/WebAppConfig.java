@@ -2,9 +2,11 @@ package org.bgi.webseed.config;
 
 import javax.servlet.Filter;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+@Order(1)
 public class WebAppConfig extends
 		AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -25,6 +27,6 @@ public class WebAppConfig extends
 
     @Override
     protected Filter[] getServletFilters() {
-        return new Filter[] { new HiddenHttpMethodFilter() };
+        return new Filter[] { new HiddenHttpMethodFilter()};
     }
 }

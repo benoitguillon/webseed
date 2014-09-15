@@ -17,7 +17,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"org.bgi.webseed.api.**", "org.bgi.webseed.ctrl.**"})
+@ComponentScan({"org.bgi.webseed.**.api.**", "org.bgi.webseed.ctrl.**"})
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	private static final Log logger = LogFactory.getLog(WebMvcConfig.class);
