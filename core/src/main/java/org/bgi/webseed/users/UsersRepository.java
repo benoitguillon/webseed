@@ -9,5 +9,5 @@ public interface UsersRepository extends CrudRepository<User, Long> {
 
 	public User findByFirmAndUserName(Firm firm, String userName);
 	
-	public List<User> findByFirmSortByUserName(Firm firm);
+	public List<User> findByFirmOrderByUserNameAsc(Firm firm);
 }

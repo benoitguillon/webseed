@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @author guillon
  */
 @Configuration
-@ComponentScan
+@ComponentScan(basePackages={"org.bgi.webseed"})
 public class RootConfig {
 	
 	@Bean

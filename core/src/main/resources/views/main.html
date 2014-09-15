@@ -1,5 +1,12 @@
 <div id="content" ng-controller="CoreCtrl">
   	<h1>This is my home</h1>
-	<button ng-click="incrementTestIndex()">{{label}}</button>
-	<p>Test counter is <span>{{testIndex}}</span></p>
+  	
+	<p>Test counter is <span>{{testIndex}}</span> <button ng-click="incrementTestIndex()">{{label}}</button> </p>
+	
+	<p>User REST test : <input type="text" ng-value="userId"/><button ng-click="userDetails(userId)">Get details</button></p>
+	
+	<p><span>{{userDetail.id}}</span></p>
+	<p><span>{{userDetail.userName}}</span></p>
+	
+	
 </div>

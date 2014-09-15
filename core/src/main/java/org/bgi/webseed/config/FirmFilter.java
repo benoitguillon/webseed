@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.bgi.webseed.ctx.AppContext;
+import org.bgi.webseed.ctx.MutableAppContext;
 import org.bgi.webseed.firms.Firm;
 import org.bgi.webseed.firms.FirmsRepository;
 import org.springframework.web.context.WebApplicationContext;
@@ -59,9 +61,13 @@ public class FirmFilter extends OncePerRequestFilter {
 		}
 		else {
 			log.info("Found firm " + firm.getName() + " for potential name " + potentialFirm);
+			MutableAppContext ctx = new MutableAppContext();
+			ctx.setFirm(firm);
+			AppContext.setCurrentAppContext(ctx);
 			request.setAttribute(FIRM_REQUEST_ATTR, firm);
 			String path = removeFirmFromPath(servletPath, firm.getWebContext());
 			request.getRequestDispatcher(path).forward(request, response);
+			AppContext.clearCurrentAppContext();
 		}
 		log.info("doFilterInternal end");
 	}

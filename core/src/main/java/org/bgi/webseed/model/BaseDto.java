@@ -10,4 +10,8 @@ public abstract class BaseDto<O extends BaseEntity> {
 		
 	}
 	
+	public abstract O toModel();
+	
+	public abstract void fromModel(O model);
+	
 }

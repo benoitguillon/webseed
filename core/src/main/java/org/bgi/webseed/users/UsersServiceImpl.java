@@ -22,7 +22,7 @@ public class UsersServiceImpl implements UsersService {
 
 	@Override
 	public List<User> findByFirm(Firm firm) {
-		return usersRepository.findByFirmSortByUserName(firm);
+		return usersRepository.findByFirmOrderByUserNameAsc(firm);
 	}
 
 }

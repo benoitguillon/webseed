@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages={"org.bgi.webseed.firms"})
+@EnableJpaRepositories(basePackages={"org.bgi.webseed.*"})
 public class PersistenceConfig {
 	
 	@Bean
