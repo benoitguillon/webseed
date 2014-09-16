@@ -5,6 +5,7 @@ import org.bgi.webseed.menu.MenuRegistry;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * Main application configuration
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan(basePackages={"org.bgi.webseed"})
+@Import(SecurityConfig.class)
 public class RootConfig {
 	
 	@Bean

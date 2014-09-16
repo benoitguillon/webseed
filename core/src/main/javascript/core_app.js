@@ -9,9 +9,9 @@ webseed_core.controller('CoreCtrl', function($scope, User){
 	$scope.incrementTestIndex = function(){
 		$scope.testIndex++;
 	}
-	$scope.userDetails = function(userId){
-		console.log("Getting details on user " + userId);
-		$scope.userDetail = User.get({id:userId, firm:'firmOne'});
+	$scope.userDetails = function(){
+		console.log("Getting details on user " + $scope.userId);
+		$scope.userDetail = User.get({id:$scope.userId, firm:'firmOne'});
 	}
 });
 
