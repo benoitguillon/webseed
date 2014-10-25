@@ -10,10 +10,13 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.thymeleaf.spring3.SpringTemplateEngine;
-import org.thymeleaf.spring3.templateresolver.SpringResourceTemplateResolver;
-import org.thymeleaf.spring3.view.ThymeleafViewResolver;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.AbstractTemplateResolver;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.thymeleaf.templateresolver.FileTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
+import org.thymeleaf.templateresolver.TemplateResolver;
 
 @Configuration
 @EnableWebMvc
@@ -22,6 +25,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	private static final Log logger = LogFactory.getLog(WebMvcConfig.class);
 	
+	private static final boolean DEV = true;
+	
 	public WebMvcConfig(){
 		super();
 		logger.info("Creating WebMvcConfig");
@@ -29,9 +34,17 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/css/**/*.css").addResourceLocations("classpath:/css/").setCachePeriod(31556926);
-        registry.addResourceHandler("/img/**").addResourceLocations("/img/").setCachePeriod(31556926);
-        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/").setCachePeriod(31556926);
+		if(DEV){
+			registry.addResourceHandler("/css/**").addResourceLocations("file:/Users/guillon/dev/webseed/core/src/main/javascript/").setCachePeriod(31556926);
+	        registry.addResourceHandler("/img/**").addResourceLocations("/img/").setCachePeriod(31556926);
+	        registry.addResourceHandler("/js/**").addResourceLocations("file:/Users/guillon/dev/webseed/core/src/main/javascript/").setCachePeriod(31556926);
+		}
+		else {
+			registry.addResourceHandler("/css/**").addResourceLocations("classpath:/").setCachePeriod(31556926);
+	        registry.addResourceHandler("/img/**").addResourceLocations("/img/").setCachePeriod(31556926);
+	        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/").setCachePeriod(31556926);
+		}
+        
     }
 	
 	@Override
@@ -40,27 +53,27 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     }
 	
 	@Bean
-    public ITemplateResolver templateResolver() {
-		SpringResourceTemplateResolver result = new SpringResourceTemplateResolver();
-		result.setPrefix("classpath:/views/");
-        result.setSuffix(".html");
-        result.setTemplateMode("HTML5");
-        return result;
-    }
-	
-	@Bean
-	public SpringTemplateEngine templateEngine(ITemplateResolver templateResolver){
-		SpringTemplateEngine result = new SpringTemplateEngine();
-		result.setTemplateResolver(templateResolver);
-		return result;
-	}
-	
-	@Bean
-    public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
+    public ViewResolver viewResolver() {
+		TemplateResolver templateResolver = null;
+		if(DEV){
+			templateResolver = new FileTemplateResolver();
+			templateResolver.setSuffix(".html");
+			templateResolver.setPrefix("/Users/guillon/dev/webseed/core/src/main/html/views/");
+			templateResolver.setTemplateMode("XHTML");
+			templateResolver.setCacheable(false);
+		}
+		else {
+			templateResolver = new ClassLoaderTemplateResolver();
+			templateResolver.setTemplateMode("XHTML");
+			templateResolver.setPrefix("views/");
+			templateResolver.setSuffix(".html");
+		}
+        SpringTemplateEngine engine = new SpringTemplateEngine();
+        engine.setTemplateResolver(templateResolver);
+ 
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.setTemplateEngine(templateEngine);
-        viewResolver.setOrder(1);
+        viewResolver.setTemplateEngine(engine);
+        viewResolver.setCache(false);
         return viewResolver;
     }
-	
 }

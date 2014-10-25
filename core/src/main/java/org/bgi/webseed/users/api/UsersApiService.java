@@ -14,9 +14,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 @RequestMapping("/api/users")
@@ -58,6 +60,12 @@ public class UsersApiService {
 		result.setLastName("lastName");
 		result.setFirstName("firstName");
 		return new ResponseEntity<UserDto>(result, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.POST, consumes = {"application/json"})
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void saveUser(@RequestBody UserDto user){
+		logger.info("Saving user " + user.getUserName());
 	}
 
 }

@@ -1,7 +1,4 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:tiles="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
       
 	<body>
 	    <div th:fragment="navbar">
@@ -21,9 +18,8 @@
 		            <li class="dropdown">
 		              <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
 		              <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-		                <li role="presentation"><a role="menuitem" tabindex="-1" href="#/Admin/AddUser">Add user</a></li>
-		                <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Another action</a></li>
-		                <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Something else here</a></li>
+		                <li role="presentation"><a role="menuitem" tabindex="-1" href="#/admin/user/add">Add user</a></li>
+		                <li role="presentation"><a role="menuitem" tabindex="-1" href="#/admin/user/list">List user</a></li>
 		                <li role="presentation" class="divider"></li>
 		                <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Separated link</a></li>
 		              </ul>

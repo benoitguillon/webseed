@@ -20,24 +20,17 @@ public class FirmDetectionFilter extends AbstractFirmFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 		String requestedPath = request.getServletPath();
 		log.info("Handling request on " + requestedPath);
-		if("/login".equals(requestedPath)){
-			filterChain.doFilter(request, response);
-			return;
-		}
-		Firm firm = null;
-		Object objectInRequest = request.getAttribute(FIRM_REQUEST_ATTR);
-		log.info("ObjectInRequest = " + objectInRequest);
-		if(objectInRequest != null && objectInRequest instanceof Firm){
-			firm = (Firm)objectInRequest;
-		}
+		Firm firm = findFirmInRequest(request);
 		if(firm == null){
-			String potentialFirm = FirmDetectionUtility.extractFirmNameFromPath(requestedPath);
+			String potentialFirm = request.getParameter("firmName");
+			if(potentialFirm == null)
+				potentialFirm = FirmDetectionUtility.extractFirmNameFromPath(requestedPath);
 			firm = this.findFirmByPath(potentialFirm, request);
 			if(firm == null){
 				log.error("No firm found for potential firm name " + potentialFirm);
 				response.sendError(HttpStatus.FORBIDDEN.value(), "Firm not found");
 				return;
-			} 
+			}
 		}
 		
 		MutableAppContext ctx = new MutableAppContext();
