@@ -1,6 +1,6 @@
 'use strict';
 
-var webseed_core = angular.module('WebSeedCore', ['ngRoute', 'ngResource', 'ui.validate']);
+var webseed_core = angular.module('WebSeedCore', ['ngRoute', 'ngResource']);
 
 webseed_core.controller('CoreCtrl', function($scope, User, AppContextService){
 	AppContextService.initializeCurrentFirm();
