@@ -1,47 +1,49 @@
-<p>This is the user add / edit page and it rocks !! and rocks again</p>
-
 <form name="userForm" role="form" class="form-horizontal" novalidate="novalidate">
 	
-	<div class="form-group" ng-class="{'has-error': userForm.username.$invalid &amp;&amp; !userForm.username.$pristine}">
-		<label class="col-sm-2 control-label" for="username">User name <span class="required">*</span></label>
-		<div class="col-sm-3">
-			<input id="username" name="username" ng-change="" ng-required="true" ng-model="user.userName" type="text" class="form-control" placeholder="Enter a user name, must be unique in your firm"
-			ui-validate=" 'validateUserName()' ">
-			</input>
-			<span class="help-block">Used to log on the application (login)</span>
+	<div class="row">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4 formTitle">Add a new user to firm</div>
+		<div class="col-sm-4">
+			<button class="btn btn-success btn-sm" ng-click="save()" ng-disabled="userForm.$invalid">Save</button>
+        	<button type="reset" class="btn btn-default btn-sm" ng-disabled="!!userForm.$pristine">Reset</button>
 		</div>
-		<div class="col-sm-3" ng-if="userForm.username.$invalid &amp;&amp; !userForm.username.$pristine">User name is mandatory:<br/> 
-			required error: {{userForm.username.$error.required}}<br/>
-			validator error: {{userForm.username.$error.validator}}</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12"><hr/></div>
+	</div>
+
+	<div class="form-group" ng-class="{'has-error': userForm.username.$invalid &amp;&amp; !userForm.username.$pristine}">
+		<label class="col-sm-4 control-label" for="username">User name <span class="required">*</span></label>
+		<div class="col-sm-4">
+			<input id="username" name="username" type="text" ng-required="true" ng-model="user.userName" class="form-control" username-validator=""></input>
+			<span class="help-block">Used to log on the application (login). Must be unique in the firm</span>
+		</div>
+		<div class="col-sm-4" ng-if="userForm.username.$touched">
+			<div ng-if="userForm.username.$error.required">User name is mandatory</div>
+			<div ng-if="userForm.username.$error.username">Custom validator</div>
+		</div>
 	</div>
 	
-	
 	<div class="form-group">
-		<label class="col-sm-2 control-label" for="firstName">First name</label>
-		<div class="col-sm-3">
+		<label class="col-sm-4 control-label" for="firstName">First name</label>
+		<div class="col-sm-4">
 			<input id="firstName" ng-model="user.firstName" type="text" class="form-control" placeholder="First name"></input>
 		</div>
 	</div>
 	
 	<div class="form-group">
-		<label class="col-sm-2 control-label" for="lastName">Last name</label>
-		<div class="col-sm-3">
+		<label class="col-sm-4 control-label" for="lastName">Last name</label>
+		<div class="col-sm-4">
 			<input id="lastName" ng-model="user.lastName" type="text" class="form-control" placeholder="Last name"></input>
 		</div>
 	</div>
 	
 	<div class="form-group">
-		<label class="col-sm-2 control-label" for="email">Email</label>
-		<div class="col-sm-3">
+		<label class="col-sm-4 control-label" for="email">Email</label>
+		<div class="col-sm-4">
 			<input id="email" ng-model="user.email" type="email" class="form-control"></input>
 		</div>
-	</div>
-	
-	<div class="form-group last">
-        <div class="col-md-offset-3 col-md-9">
-            <button class="btn btn-success btn-sm" ng-click="save()" ng-disabled="form.$invalid">Save</button>
-             <button type="reset" class="btn btn-default btn-sm">Reset</button>
-        </div>
-    </div>
+	</div>	
 	
 </form>

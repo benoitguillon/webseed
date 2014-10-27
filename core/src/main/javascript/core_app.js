@@ -31,6 +31,18 @@ webseed_core.controller('AddUserCtrl', function($scope, User){
 	};
 });
 
+webseed_core.directive('usernameValidator', function(){
+	return {
+		require: 'ngModel',
+		link: function ($scope, elem, attrs, ngModel){
+			ngModel.$validators.username=function(modelValue, viewValue){
+				var value=modelValue || viewValue;
+				return value != undefined && value.charAt(0) == 'a';
+			}
+		}
+	};
+});
+
 
 webseed_core.config(function($routeProvider){
 	$routeProvider.when('/admin/user/add', {
